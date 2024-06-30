@@ -1,7 +1,7 @@
 package dev.kinodesu.MeowMeowApi.model;
 
-import dev.kinodesu.MeowMeowApi.model.shop.Discount;
-import dev.kinodesu.MeowMeowApi.model.stock.Stock;
+import dev.kinodesu.MeowMeowApi.model.shop.DiscountModel;
+import dev.kinodesu.MeowMeowApi.model.stock.StockModel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -47,14 +47,25 @@ public class ProductModel {
     // ! Não vai funfar do jeito q a gente quer, com HashMap é (identificador, valor)
     // ? ObjectMapper => converter pra salver como json
     @Column(name = "product_details")
-    private Map<String, String> details = new HashMap<>();
+    private String details;
+    /* private Map<String, String> details = new HashMap<>(); */
     
     @OneToOne
     @JoinColumn(name = "fk_stock_id", referencedColumnName = "stock_id")
-    private Stock stock;
+    private StockModel stock;
     
     @OneToOne
     @JoinColumn(name = "fk_discount_id", referencedColumnName = "discount_id")
-    private Discount discount;
+    private DiscountModel discount;
+
+    public ProductModel(DTOProductModel product) {
+        this.id = null;
+        this.name = product.name();
+        this.description = product.description();
+        this.price = product.price();
+        this.details = product.details();
+        this.stock = new StockModel(product.stock());
+        this.discount = null;
+    }
 
 }

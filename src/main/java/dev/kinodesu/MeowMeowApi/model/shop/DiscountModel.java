@@ -22,7 +22,7 @@ import jakarta.persistence.Table;
 @Setter
 @ToString
 @EqualsAndHashCode(of = "id")
-public class Discount {
+public class DiscountModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

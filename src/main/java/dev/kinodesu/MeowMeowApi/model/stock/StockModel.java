@@ -1,6 +1,5 @@
 package dev.kinodesu.MeowMeowApi.model.stock;
 
-import dev.kinodesu.MeowMeowApi.model.ProductModel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,7 +21,12 @@ import lombok.ToString;
 @Setter
 @ToString
 @EqualsAndHashCode(of = "id")
-public class Stock {
+public class StockModel {
+
+    public StockModel(DTOStock stock) {
+        this.id = null;
+        this.quantity = stock.quantity();
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +34,6 @@ public class Stock {
     private Long id;
     
     @Column(name = "stock_quantity")
-    private int quantity;
+    private Integer quantity;
 
 }

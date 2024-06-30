@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import dev.kinodesu.MeowMeowApi.model.DTOProductModel;
 import dev.kinodesu.MeowMeowApi.model.ProductModel;
 import dev.kinodesu.MeowMeowApi.service.ProductService;
 
@@ -20,9 +21,9 @@ public class ProductController {
     private ProductService productService;
 
     @PostMapping
-    public ResponseEntity<?> postProduct(@RequestBody ProductModel product){
+    public ResponseEntity<?> postProduct(@RequestBody DTOProductModel product){
         try {
-            return new ResponseEntity<ProductModel>(productService.postProduct(product), HttpStatus.CREATED);
+            return new ResponseEntity<ProductModel>(productService.postProduct(new ProductModel(product)), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
