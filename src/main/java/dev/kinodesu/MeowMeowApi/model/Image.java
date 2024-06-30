@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 public class Image {
     private int id;
-    private Product product;
+    private ProductModel product;
     private String type;
     private String name;
     private boolean isMain;
