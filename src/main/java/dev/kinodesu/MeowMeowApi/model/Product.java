@@ -19,14 +19,14 @@ import java.util.Set;
 @Getter
 @Setter
 public class Product {
-    private int id;
+    private Long id;
     private String name;
     private String description;
-    private double value;
+    private double price;
     private Map<String, String> details = new HashMap<>();
-    private Discount discount;
-    private Set<Category> categories = new HashSet<>();
-    private Set<Rating> ratings = new HashSet<>();
-    private Stock stock;
-
+//    private Discount discount;
+//    private Set<Category> categories = new HashSet<>();
+//    private Set<Rating> ratings = new HashSet<>();
+//    private Set<Image> images = new HashSet<>();
+//    private Stock stock;
 }
