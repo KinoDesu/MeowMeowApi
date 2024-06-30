@@ -45,6 +45,7 @@ public class ProductModel {
     private Double price;
     
     // ! Não vai funfar do jeito q a gente quer, com HashMap é (identificador, valor)
+    // ? ObjectMapper => converter pra salver como json
     @Column(name = "product_details")
     private Map<String, String> details = new HashMap<>();
     
