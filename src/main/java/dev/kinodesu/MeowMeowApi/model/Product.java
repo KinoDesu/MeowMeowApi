@@ -24,6 +24,7 @@ public class Product {
     private String description;
     private double price;
     private Map<String, String> details = new HashMap<>();
+    private boolean isActive;
 //    private Discount discount;
 //    private Set<Category> categories = new HashSet<>();
 //    private Set<Rating> ratings = new HashSet<>();

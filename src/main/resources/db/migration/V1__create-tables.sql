@@ -22,6 +22,7 @@ CREATE TABLE Product
  product_description longtext NOT NULL ,
  product_price       decimal NOT NULL ,
  product_details     json NOT NULL ,
+ product_active      bool NOT NULL ,
  fk_stock_id         bigint NOT NULL ,
  fk_discount_id      bigint NOT NULL ,
 
