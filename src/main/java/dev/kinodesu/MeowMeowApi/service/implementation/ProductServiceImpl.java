@@ -5,10 +5,9 @@ import dev.kinodesu.MeowMeowApi.service.ProductService;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.Comparator;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -17,7 +16,7 @@ public class ProductServiceImpl implements ProductService {
 
     public ProductServiceImpl(){
         for(int i = 1;i<=50;i++){
-            productList.add(new Product((long) i, "produto "+i, "produto "+i, i*7.35,Map.of(
+            productList.add(new Product((long) i, "produto "+String.format("%2s",i).replace(' ','0'), "produto "+i, i*7.35,Map.of(
                     "Marca", "Samsung",
                     "Modelo", "Galaxy S21",
                     "Memória RAM", "8GB",
@@ -34,9 +33,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Page<Product> getProductPage(Pageable pageable) {
+        List<Product> sortedProducts = productList.stream().sorted(getComparator(pageable.getSort())).collect(Collectors.toList());
         int start = (int) pageable.getOffset();
-        int end = Math.min(start+pageable.getPageSize(),productList.size());
-        List<Product> sublist = productList.subList(start,end);
+        int end = Math.min(start+pageable.getPageSize(),sortedProducts.size());
+        List<Product> sublist = sortedProducts.subList(start,end);
+
+
 
         return new PageImpl<>(sublist,pageable, productList.size());
     }
@@ -45,5 +47,29 @@ public class ProductServiceImpl implements ProductService {
     public void changeProductStatus(Long productId) {
         Product product = productList.stream().filter(x-> Objects.equals(x.getId(), productId)).findFirst().get();
         product.setActive(!product.isActive());
+    }
+
+    private Comparator<Product> getComparator(Sort sort) {
+        Comparator<Product> comparator = Comparator.comparing(produto -> {
+            Sort.Order order = sort.iterator().next();
+            switch (order.getProperty()) {
+                case "id":
+                    return (Comparable) produto.getId();
+                case "name":
+                    return (Comparable) produto.getName();
+                case "price":
+                    return (Comparable) produto.getPrice();
+                case "isActive":
+                    return (Comparable) produto.isActive();
+                default:
+                    throw new IllegalArgumentException("Propriedade desconhecida: " + order.getProperty());
+            }
+        });
+
+        if (sort.iterator().next().getDirection() == Sort.Direction.DESC) {
+            comparator = comparator.reversed();
+        }
+
+        return comparator;
     }
 }
