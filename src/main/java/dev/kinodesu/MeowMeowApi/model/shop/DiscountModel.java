@@ -24,6 +24,12 @@ import jakarta.persistence.Table;
 @EqualsAndHashCode(of = "id")
 public class DiscountModel {
 
+    public DiscountModel(DTODiscount discount) {
+        this.id = discount.id();
+        this.description = discount.description();
+        this.value = discount.value();
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "discount_id")
@@ -35,7 +41,9 @@ public class DiscountModel {
     @Column(name = "discount_value")
     private Double value;
 
-    /* private LocalDate startDate;
-    private LocalDate endDate; */
+    /*
+     * private LocalDate startDate;
+     * private LocalDate endDate;
+     */
 
 }

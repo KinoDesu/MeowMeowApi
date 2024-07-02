@@ -24,7 +24,7 @@ import lombok.ToString;
 public class StockModel {
 
     public StockModel(DTOStock stock) {
-        this.id = null;
+        this.id = stock.id();
         this.quantity = stock.quantity();
     }
 
