@@ -10,7 +10,7 @@ public record DTOProduct(
         String description,
         Double price,
         Map<String, String> details,
-        Boolean isActive,
+        Boolean active,
         DTOStock stock,
         DTODiscount discount) {
 

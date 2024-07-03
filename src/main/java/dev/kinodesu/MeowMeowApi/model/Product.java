@@ -1,13 +1,9 @@
 package dev.kinodesu.MeowMeowApi.model;
 
-import dev.kinodesu.MeowMeowApi.model.shop.Category;
 import dev.kinodesu.MeowMeowApi.model.shop.Discount;
-import dev.kinodesu.MeowMeowApi.model.shop.Rating;
 import dev.kinodesu.MeowMeowApi.model.stock.Stock;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,7 +39,7 @@ public class Product {
     private Map<String, String> details = new HashMap<>();
 
     @Column(name = "product_active")
-    private Boolean isActive;
+    private Boolean active;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_stock_id", referencedColumnName = "stock_id")
@@ -63,7 +59,7 @@ public class Product {
         this.description = product.description();
         this.price = product.price();
         this.details = product.details();
-        this.isActive = product.isActive();
+        this.active = product.active();
         this.stock = new Stock(product.stock());
         this.discount = product.discount().id() == null ? null : new Discount(product.discount());
     }
