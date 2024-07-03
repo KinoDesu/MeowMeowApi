@@ -12,7 +12,7 @@ CREATE TABLE Product (
     product_name varchar(100) NOT NULL,
     product_description longtext NOT NULL,
     product_price decimal NOT NULL,
-    product_details json NOT NULL,
+    product_active bool NOT NULL,
     fk_stock_id bigint NOT NULL,
     fk_discount_id bigint,
     KEY FK_1 (fk_stock_id),
@@ -49,4 +49,11 @@ CREATE TABLE Rating (
     rating_comment text NOT NULL,
     KEY FK_1 (fk_product_id),
     CONSTRAINT FK_5 FOREIGN KEY FK_1 (fk_product_id) REFERENCES Product (product_id)
+);
+CREATE TABLE product_details (
+    fk_product_id BIGINT,
+    detail_key VARCHAR(25) NOT NULL,
+    detail_value VARCHAR(255) NOT NULL,
+    PRIMARY KEY (fk_product_id, detail_key),
+    FOREIGN KEY (fk_product_id) REFERENCES product(product_id)
 );

@@ -1,6 +1,6 @@
 package dev.kinodesu.MeowMeowApi.model.shop;
 
-import dev.kinodesu.MeowMeowApi.model.ProductModel;
+import dev.kinodesu.MeowMeowApi.model.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +16,6 @@ import java.util.Set;
 public class Category {
     private int id;
     private String name;
-    private Set<ProductModel> products = new HashSet<>();
+    private Set<Product> products = new HashSet<>();
 
 }

@@ -22,9 +22,9 @@ import jakarta.persistence.Table;
 @Setter
 @ToString
 @EqualsAndHashCode(of = "id")
-public class DiscountModel {
+public class Discount {
 
-    public DiscountModel(DTODiscount discount) {
+    public Discount(DTODiscount discount) {
         this.id = discount.id();
         this.description = discount.description();
         this.value = discount.value();

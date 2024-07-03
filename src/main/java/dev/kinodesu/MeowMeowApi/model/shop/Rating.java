@@ -1,6 +1,6 @@
 package dev.kinodesu.MeowMeowApi.model.shop;
 
-import dev.kinodesu.MeowMeowApi.model.ProductModel;
+import dev.kinodesu.MeowMeowApi.model.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 public class Rating {
     private int id;
-    private ProductModel product;
+    private Product product;
     private int value;
     private String comment;
 

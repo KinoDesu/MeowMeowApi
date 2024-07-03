@@ -21,9 +21,9 @@ import lombok.ToString;
 @Setter
 @ToString
 @EqualsAndHashCode(of = "id")
-public class StockModel {
+public class Stock {
 
-    public StockModel(DTOStock stock) {
+    public Stock(DTOStock stock) {
         this.id = stock.id();
         this.quantity = stock.quantity();
     }
