@@ -1,0 +1,16 @@
+{
+    "id": "",
+    "name": "",
+    "description": "",
+    "price": "",
+    "details": {
+
+    },
+    "stock": {
+        "id": 0,
+        "quantity": 0
+    },
+    "discount": {
+        "id": null
+    }
+}
