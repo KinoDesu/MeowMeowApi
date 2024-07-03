@@ -27,12 +27,22 @@ public class ProductController {
     @GetMapping()
     public ResponseEntity<?> getProductList() {
         List<Product> productList = productService.getProductList();
+
+        if (productList.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
         return ResponseEntity.ok().body(productList);
     }
 
     @GetMapping("page")
     public ResponseEntity<?> getPagedProductList(@PageableDefault(value = 10) Pageable pageable){
         Page<Product> page = productService.getProductPage(pageable);
+
+        if (page.getContent().isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
         return ResponseEntity.ok().body(page);
     }
 
