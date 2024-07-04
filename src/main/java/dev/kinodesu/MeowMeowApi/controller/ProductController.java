@@ -15,6 +15,7 @@ import dev.kinodesu.MeowMeowApi.service.ProductService;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("product")
@@ -27,21 +28,18 @@ public class ProductController {
     @GetMapping()
     public ResponseEntity<?> getProductList() {
         List<Product> productList = productService.getProductList();
-
-        if (productList.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-
         return ResponseEntity.ok().body(productList);
     }
 
     @GetMapping("page")
     public ResponseEntity<?> getPagedProductList(@PageableDefault(value = 10) Pageable pageable){
         Page<Product> page = productService.getProductPage(pageable);
+        return ResponseEntity.ok().body(page);
+    }
 
-        if (page.getContent().isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
+    @GetMapping("filter")
+    public ResponseEntity<?> getProductByDetail(@PageableDefault(value = 10) Pageable pageable, @RequestParam Map<String,String> filters){
+        Page<Product> page = productService.getFilteredProductPage(pageable,filters);
 
         return ResponseEntity.ok().body(page);
     }
