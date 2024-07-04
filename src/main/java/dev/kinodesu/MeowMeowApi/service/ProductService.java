@@ -6,12 +6,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public interface ProductService {
     List<Product> getProductList();
 
     Page<Product> getProductPage(Pageable pageable);
+
+    Page<Product> getFilteredProductPage(Pageable pageable, Map<String,String> filters);
 
     void changeProductStatus(Long productId);
 
