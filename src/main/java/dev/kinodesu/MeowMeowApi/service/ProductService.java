@@ -10,6 +10,8 @@ import java.util.Map;
 
 @Service
 public interface ProductService {
+
+    Product getProductById(Long id);
     List<Product> getProductList();
 
     Page<Product> getProductPage(Pageable pageable);

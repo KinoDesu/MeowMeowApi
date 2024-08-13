@@ -36,7 +36,12 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getProductById(@PathVariable Long id) {
-        throw new NullPointerException();
+        Product responseProduct = productService.getProductById(id);
+        if (responseProduct == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(responseProduct);
     }
 
     @GetMapping("page")
