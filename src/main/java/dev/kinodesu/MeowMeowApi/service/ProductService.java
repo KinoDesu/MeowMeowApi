@@ -14,7 +14,7 @@ public interface ProductService {
 
     Page<Product> getProductPage(Pageable pageable);
 
-    Page<Product> getFilteredProductPage(Pageable pageable, Map<String,String> filters);
+    Page<Product> getFilteredProductPage(Pageable pageable, Map<String, String> filters);
 
     void changeProductStatus(Long productId);
 
