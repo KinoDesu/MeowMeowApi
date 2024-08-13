@@ -27,6 +27,11 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
 
     @Override
+    public Product getProductById(Long id) {
+        return productRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public List<Product> getProductList() {
         return productRepository.findAllByOrderByIdDesc();
     }
@@ -72,10 +77,10 @@ public class ProductServiceImpl implements ProductService {
         int i = 0;
         do {
             Map.Entry<String, String> filter;
-            if(!filters.isEmpty()){
+            if (!filters.isEmpty()) {
                 filter = filters.entrySet().stream().toList().get(i);
-            }else{
-                filters.put("nome","");
+            } else {
+                filters.put("nome", "");
                 filter = filters.entrySet().stream().toList().get(i);
             }
 
@@ -135,8 +140,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product postProduct(Product product) {
-        Map<String,String> details = product.getDetails();
-        details.put("nome",product.getName());
+        Map<String, String> details = product.getDetails();
+        details.put("nome", product.getName());
         product.setDetails(details);
         return productRepository.save(product);
     }
