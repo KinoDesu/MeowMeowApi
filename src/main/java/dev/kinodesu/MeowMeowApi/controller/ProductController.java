@@ -13,7 +13,10 @@ import dev.kinodesu.MeowMeowApi.model.DTOProduct;
 import dev.kinodesu.MeowMeowApi.model.Product;
 import dev.kinodesu.MeowMeowApi.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
@@ -31,15 +34,20 @@ public class ProductController {
         return ResponseEntity.ok().body(productList);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getProductById(@PathVariable Long id) {
+        throw new NullPointerException();
+    }
+
     @GetMapping("page")
-    public ResponseEntity<?> getPagedProductList(@PageableDefault(value = 10) Pageable pageable){
+    public ResponseEntity<?> getPagedProductList(@PageableDefault(value = 10) Pageable pageable) {
         Page<Product> page = productService.getProductPage(pageable);
         return ResponseEntity.ok().body(page);
     }
 
     @GetMapping("filter")
-    public ResponseEntity<?> getProductByDetail(@PageableDefault(value = 10) Pageable pageable, @RequestParam Map<String,String> filters){
-        Page<Product> page = productService.getFilteredProductPage(pageable,filters);
+    public ResponseEntity<?> getProductByDetail(@PageableDefault(value = 10) Pageable pageable, @RequestParam Map<String, String> filters) {
+        Page<Product> page = productService.getFilteredProductPage(pageable, filters);
 
         return ResponseEntity.ok().body(page);
     }
@@ -48,8 +56,16 @@ public class ProductController {
     @Transactional
     public ResponseEntity<?> postProduct(@RequestBody DTOProduct product) {
         try {
-            return new ResponseEntity<Product>(productService.postProduct(new Product(product)),
-                    HttpStatus.CREATED);
+
+            Product Responseproduct = productService.postProduct(new Product(product));
+
+            URI location = ServletUriComponentsBuilder
+                    .fromCurrentRequest()
+                    .path("/{id}")
+                    .buildAndExpand(Responseproduct.getId())
+                    .toUri();
+
+            return ResponseEntity.created(location).build();
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -68,7 +84,7 @@ public class ProductController {
 
     @DeleteMapping("{id}")
     @Transactional
-    public ResponseEntity<?> changeProductStatus(@PathVariable("id") Long productId){
+    public ResponseEntity<?> changeProductStatus(@PathVariable("id") Long productId) {
         productService.changeProductStatus(productId);
         return ResponseEntity.noContent().build();
     }
