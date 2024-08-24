@@ -13,8 +13,7 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product,Long> {
 
     List<Product> findAllByOrderByIdDesc();
-    Page<Product> findAll(Pageable pageable);
-
+    
     @Query("SELECT p FROM Product p JOIN p.details pd WHERE KEY(pd) = :detailKey AND VALUE(pd) LIKE %:value% AND p.name LIKE %:name% AND p.price between :min and :max")
     Page<Product> findProductByFilters(Pageable pageable, String detailKey, String value, Double min, Double max, String name);
 }
