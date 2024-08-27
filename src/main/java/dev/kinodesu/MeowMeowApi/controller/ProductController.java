@@ -1,5 +1,6 @@
 package dev.kinodesu.MeowMeowApi.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +21,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
+@Tag(name = "Produto")
 @RestController
 @RequestMapping("product")
 @RequiredArgsConstructor
