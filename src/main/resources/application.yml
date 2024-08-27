@@ -1,0 +1,14 @@
+spring:
+  main:
+    banner-mode: console
+  application:
+    name: "MeowMeowApi"
+    version: "0.0.1"
+    description: "API da Meow Meow"
+  datasource:
+    url: jdbc:mysql://localhost/MeowMeowDb
+    username: root
+    password:
+
+flyway:
+  baselineOnMigrate: true
