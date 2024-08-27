@@ -1,0 +1,1 @@
+ALTER TABLE meow_user ADD COLUMN user_active boolean;

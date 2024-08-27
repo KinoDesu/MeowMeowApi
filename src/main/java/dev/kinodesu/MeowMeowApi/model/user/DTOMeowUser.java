@@ -4,5 +4,5 @@ public record DTOMeowUser(Long id,
                           String name,
                           String email,
                           String documentNumber,
-                          String phoneNumber) {
-}
+                          String phoneNumber,
+                          Boolean active) {}

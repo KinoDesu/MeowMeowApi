@@ -1,23 +1,27 @@
 package dev.kinodesu.MeowMeowApi.service;
 
-import java.util.List;
-import java.util.Map;
-
+import dev.kinodesu.MeowMeowApi.model.user.DTOMeowUser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import dev.kinodesu.MeowMeowApi.model.user.MeowUser;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public interface UserService {
 
-    MeowUser getUserById(Long id);
+    DTOMeowUser getUserById(Long id);
 
-    List<MeowUser> getUserList();
+    List<DTOMeowUser> getUserList();
 
-    Page<MeowUser> getUserPage(Pageable pageable);
+    Page<DTOMeowUser> getUserPage(Pageable pageable);
 
-    Page<MeowUser> getFilteredUserPage(Pageable pageable, Map<String, String> filters);
+    Page<DTOMeowUser> getFilteredUserPage(Pageable pageable, Map<String, String> filters);
 
+    DTOMeowUser postUser(DTOMeowUser newMeowUser);
+
+    void putUserById(Long id, DTOMeowUser newMeowUser);
+
+    void changeUserStatusById(Long id);
 }
