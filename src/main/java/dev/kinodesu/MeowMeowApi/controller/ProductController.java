@@ -80,7 +80,7 @@ public class ProductController {
     @Transactional
     public ResponseEntity<?> putProductById(@PathVariable Long id, @RequestBody DTOProduct product) {
         try {
-            return new ResponseEntity<Product>(productService.putProductById(id, new Product(product)),
+            return new ResponseEntity<>(productService.putProductById(id, new Product(product)),
                     HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
