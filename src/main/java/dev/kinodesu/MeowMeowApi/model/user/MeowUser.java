@@ -15,13 +15,14 @@ public class MeowUser {
         this.email = user.email();
         this.documentNumber = user.documentNumber();
         this.phoneNumber = user.phoneNumber();
+        this.active = user.active();
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Long id;
-    
+
     @Column(name = "user_name")
     private String name;
 
@@ -33,4 +34,7 @@ public class MeowUser {
 
     @Column(name = "user_phone_number")
     private String phoneNumber;
+
+    @Column(name = "user_active")
+    private Boolean active;
 }
